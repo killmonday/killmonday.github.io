@@ -22,7 +22,7 @@
  实时监测附近设备发出的Probe帧 发现目标设备发出的Probe帧（通过MAC地址确认是目标设备） 调用蜂鸣器硬件发出震动警告  测试时：
  脚本在虚拟机kali linux 2019 x64执行 该虚拟机外接了USB无线网卡（TL-WN821N），并安装了驱动 该网卡已设置工作模式为监听模式（Monitor)。 使用荣耀9（EMUI9)和小米3（MIUI8）作为目标，进行对照试验。  结论：
  以该网卡的性能，可以在10米范围内探测到目标设备出现，并发出警报。 部分手机已启用MAC地址随机化，只有在和路由器连接握手时才能抓到正确MAC地址。 部分手机即使在关闭WLAN后依然对外发送Probe帧。  脚本：
-#!/bin/bash # 一旦出错，停止执行剩余指令set -e#airodump-ng在后台执行，并把探测结果实时写入wifi.info(airodump-ng wlan0 &amp;gt;&amp;amp; /root/wifi.info) &amp;amp;while :dogrep &amp;quot;54:C1:41:56:AA:3C&amp;quot; /root/wifi.info#grep匹配成功会返回0if [ $? == 0 ]; then #检测到了目标MAC地址，现在震动蜂鸣器beep -f 300.7 -r 10 -d 100 -l 400#杀掉airodump进程，它的任务已经结束了ps -efww|grep airodump |grep -v grep|cut -c 9-15|xargs kill -9rm /root/wifi.</description>
+#!/bin/bash # 一旦出错，停止执行剩余指令set -e#airodump-ng在后台执行，并把探测结果实时写入wifi.info(airodump-ng wlan0 &amp;gt;&amp;amp; /root/wifi.info) &amp;amp;while :dogrep &amp;#34;54:C1:41:56:AA:3C&amp;#34; /root/wifi.info#grep匹配成功会返回0if [ $? == 0 ]; then #检测到了目标MAC地址，现在震动蜂鸣器beep -f 300.7 -r 10 -d 100 -l 400#杀掉airodump进程，它的任务已经结束了ps -efww|grep airodump |grep -v grep|cut -c 9-15|xargs kill -9rm /root/wifi.</description>
     </item>
     
   </channel>
