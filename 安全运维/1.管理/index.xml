@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>1.管理 on nowhere</title>
-    <link>https://github.com/killmonday/killmonday.github.io/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E7%AE%A1%E7%90%86/</link>
+    <link>https://killmonday.github.io/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E7%AE%A1%E7%90%86/</link>
     <description>Recent content in 1.管理 on nowhere</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>2020 ownhp. All rights reserved.</copyright>
     <lastBuildDate>Tue, 25 Feb 2020 12:45:06 +0800</lastBuildDate>
     
-	<atom:link href="https://github.com/killmonday/killmonday.github.io/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://killmonday.github.io/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>NTFS权限管理</title>
-      <link>https://github.com/killmonday/killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/</link>
+      <link>https://killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/</link>
       <pubDate>Tue, 25 Feb 2020 12:45:06 +0800</pubDate>
       
-      <guid>https://github.com/killmonday/killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/</guid>
+      <guid>https://killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/</guid>
       <description>1.设权限的意义   使不同用户对文件/文件夹有不同的访问权限，防止资源被篡改、删除。
   例如IT部和人力资源部有各自的文件夹，相互之间的访问有限制。
   2.NTFS文件系统特点 可加密 保护物理安全，防止被偷窃的计算机泄密。
@@ -35,10 +35,10 @@
     
     <item>
       <title>服务器远程管理</title>
-      <link>https://github.com/killmonday/killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+      <link>https://killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
       <pubDate>Tue, 25 Feb 2020 12:45:06 +0810</pubDate>
       
-      <guid>https://github.com/killmonday/killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/</guid>
+      <guid>https://killmonday.github.io/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/</guid>
       <description>远程管理方式 1.命令管理-telnet 端口默认23。
 开启telnet服务   打开服务win+R services.msc；
   找到服务Task Scheduler和Telnet，分别设为自动启动。
