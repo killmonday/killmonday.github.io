@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html><head>
+<title>服务器远程管理</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="http://example.org/scss/journal.min.75e350a979186b10ecf739a405199a5eaf37fd6bd3463a78ae5c70c634963fde.css" integrity="sha256-deNQqXkYaxDs9zmkBRmaXq83/WvTRjp4rlxwxjSWP94=" media="screen">
+
+<script src="http://example.org//js/loadCSS.js"></script>
+<script src="http://example.org//js/table.js"></script>
+
+
+<script src="http://example.org//js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://example.org/">
+    
+        <div class="nav-title">
+            nowhere
+        </div>
+        
+        <div class="nav-subtitle">
+            a blog in the air.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4">
+                    安全运维
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+                    无线安全
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+&copy;
+	
+	2020 ownhp. All rights reserved.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%bf%9c%e7%a8%8b%e7%ae%a1%e7%90%86%e6%96%b9%e5%bc%8f" v-on:click="closeDrawer" id="远程管理方式-nav">
+										 远程管理方式
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#1%e5%91%bd%e4%bb%a4%e7%ae%a1%e7%90%86-telnet" v-on:click="closeDrawer" id="1命令管理-telnet-nav">
+										 1.命令管理-telnet
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%90%aftelnet%e6%9c%8d%e5%8a%a1" v-on:click="closeDrawer" id="开启telnet服务-nav">
+										 开启telnet服务
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%b7%bb%e5%8a%a0%e7%94%a8%e6%88%b7%e5%88%b0telnetclients%e7%bb%84" v-on:click="closeDrawer" id="添加用户到telnetclients组-nav">
+										 添加用户到TelnetClients组
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#telnet%e7%99%bb%e5%bd%95" v-on:click="closeDrawer" id="telnet登录-nav">
+										 telnet登录
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#2%e5%9b%be%e5%bd%a2%e5%8c%96%e7%ae%a1%e7%90%86-mstsc" v-on:click="closeDrawer" id="2图形化管理-mstsc-nav">
+										 2.图形化管理-mstsc
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%90%af%e8%bf%9c%e7%a8%8b%e6%a1%8c%e9%9d%a2" v-on:click="closeDrawer" id="开启远程桌面-nav">
+										 开启远程桌面
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%b7%bb%e5%8a%a0%e7%94%a8%e6%88%b7%e5%88%b0%e8%bf%9c%e7%a8%8b%e6%a1%8c%e9%9d%a2%e7%bb%84" v-on:click="closeDrawer" id="添加用户到远程桌面组-nav">
+										 添加用户到远程桌面组
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4">
+                        安全运维
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+                        无线安全
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%bf%9c%e7%a8%8b%e7%ae%a1%e7%90%86%e6%96%b9%e5%bc%8f" v-on:click="closeDrawer" id="远程管理方式-nav">
+										 远程管理方式
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#1%e5%91%bd%e4%bb%a4%e7%ae%a1%e7%90%86-telnet" v-on:click="closeDrawer" id="1命令管理-telnet-nav">
+										 1.命令管理-telnet
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%90%aftelnet%e6%9c%8d%e5%8a%a1" v-on:click="closeDrawer" id="开启telnet服务-nav">
+										 开启telnet服务
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%b7%bb%e5%8a%a0%e7%94%a8%e6%88%b7%e5%88%b0telnetclients%e7%bb%84" v-on:click="closeDrawer" id="添加用户到telnetclients组-nav">
+										 添加用户到TelnetClients组
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#telnet%e7%99%bb%e5%bd%95" v-on:click="closeDrawer" id="telnet登录-nav">
+										 telnet登录
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#2%e5%9b%be%e5%bd%a2%e5%8c%96%e7%ae%a1%e7%90%86-mstsc" v-on:click="closeDrawer" id="2图形化管理-mstsc-nav">
+										 2.图形化管理-mstsc
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%90%af%e8%bf%9c%e7%a8%8b%e6%a1%8c%e9%9d%a2" v-on:click="closeDrawer" id="开启远程桌面-nav">
+										 开启远程桌面
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%b7%bb%e5%8a%a0%e7%94%a8%e6%88%b7%e5%88%b0%e8%bf%9c%e7%a8%8b%e6%a1%8c%e9%9d%a2%e7%bb%84" v-on:click="closeDrawer" id="添加用户到远程桌面组-nav">
+										 添加用户到远程桌面组
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="http://example.org/">
+            nowhere
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://example.org/">
+        <div class="single-column-header-title">nowhere</div>
+        
+        <div class="single-column-header-subtitle">a blog in the air.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('/imageOfPaperHead/%e6%9c%8d%e5%8a%a1%e5%99%a8%e8%bf%9c%e7%a8%8b%e7%ae%a1%e7%90%86.jpg')">
+                <div class="post-title">
+                    服务器远程管理
+                    <div class="post-meta">
+                        <time itemprop="datePublished">
+                            2020-02-25 12:45
+                        </time>
+
+                        
+
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="远程管理方式">远程管理方式</h1>
+<h2 id="1命令管理-telnet">1.命令管理-telnet</h2>
+<p>端口默认23。</p>
+<h3 id="开启telnet服务">开启telnet服务</h3>
+<ul>
+<li>
+<p>打开服务win+R services.msc；</p>
+</li>
+<li>
+<p>找到服务Task Scheduler和Telnet，分别设为自动启动。</p>
+</li>
+</ul>
+<h3 id="添加用户到telnetclients组">添加用户到TelnetClients组</h3>
+<ul>
+<li>
+<p>我的电脑右键，管理，本地用户和组，组，TelnetClients。</p>
+</li>
+<li>
+<p>或命令添加：略。</p>
+</li>
+</ul>
+<h3 id="telnet登录">telnet登录</h3>
+<pre><code>telnet &lt;目标IP地址&gt;
+</code></pre>
+<h2 id="2图形化管理-mstsc">2.图形化管理-mstsc</h2>
+<p>端口默认3389。</p>
+<h3 id="开启远程桌面">开启远程桌面</h3>
+<ul>
+<li>
+<p>XP：我的电脑右键，属性，远程，勾选启用。</p>
+</li>
+<li>
+<p>WIN10：我的电脑右键，属性，远程设置、</p>
+</li>
+</ul>
+<h3 id="添加用户到远程桌面组">添加用户到远程桌面组</h3>
+<p>（管理员不用添加，它所有权限都有）</p>
+<ul>
+<li>
+<p>我的电脑右键，管理，本地用户和组，组，Remote Desktop Users。</p>
+</li>
+<li>
+<p>或命令添加：</p>
+</li>
+</ul>
+<pre><code>net localgroup &quot;Remote Desktop Users&quot;  &lt;用户名&gt;  /add
+</code></pre>
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-02-25</p>
+                </div>
+                
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://example.org/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/">
+                    Next<br>NTFS权限管理
+                </a>
+                
+                
+                
+                <a class="older-posts">
+                    Previous<br>No older posts.
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+                <p style="opacity: 0.6" align="center">
+                    <small>Comments Disabled.</small>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+&copy;
+	
+	2020 ownhp. All rights reserved.
+	</div>
+    	</div>
+    <script src="http://example.org//js/journal.js"></script>
+    </body>
+</html>

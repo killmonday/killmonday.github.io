@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html><head>
+<title>NTFS权限管理</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="http://example.org/scss/journal.min.75e350a979186b10ecf739a405199a5eaf37fd6bd3463a78ae5c70c634963fde.css" integrity="sha256-deNQqXkYaxDs9zmkBRmaXq83/WvTRjp4rlxwxjSWP94=" media="screen">
+
+<script src="http://example.org//js/loadCSS.js"></script>
+<script src="http://example.org//js/table.js"></script>
+
+
+<script src="http://example.org//js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://example.org/">
+    
+        <div class="nav-title">
+            nowhere
+        </div>
+        
+        <div class="nav-subtitle">
+            a blog in the air.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4">
+                    安全运维
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+                    无线安全
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+&copy;
+	
+	2020 ownhp. All rights reserved.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#1%e8%ae%be%e6%9d%83%e9%99%90%e7%9a%84%e6%84%8f%e4%b9%89" v-on:click="closeDrawer" id="1设权限的意义-nav">
+										 1.设权限的意义
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#2ntfs%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e7%89%b9%e7%82%b9" v-on:click="closeDrawer" id="2ntfs文件系统特点-nav">
+										 2.NTFS文件系统特点
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%af%e5%8a%a0%e5%af%86" v-on:click="closeDrawer" id="可加密-nav">
+										 可加密
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%ae%bf%e9%97%ae%e6%8e%a7%e5%88%b6%e5%88%97%e8%a1%a8%e8%ae%be%e7%bd%ae%e6%9d%83%e9%99%90" v-on:click="closeDrawer" id="访问控制列表设置权限-nav">
+										 访问控制列表（设置权限）
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%9d%83%e9%99%90%e5%88%97%e8%a1%a8" v-on:click="closeDrawer" id="权限列表-nav">
+										 权限列表
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%96%e6%b6%88%e7%bb%a7%e6%89%bf" v-on:click="closeDrawer" id="取消继承-nav">
+										 取消继承
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%9d%83%e9%99%90%e7%b4%af%e5%8a%a0" v-on:click="closeDrawer" id="权限累加-nav">
+										 权限累加
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%ba%e5%88%b6%e7%bb%a7%e6%89%bf" v-on:click="closeDrawer" id="强制继承-nav">
+										 强制继承
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%a3%81%e7%9b%98%e5%88%a9%e7%94%a8%e7%8e%87" v-on:click="closeDrawer" id="磁盘利用率-nav">
+										 磁盘利用率
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%94%af%e6%8c%81%e5%8d%95%e4%b8%aa%e6%96%87%e4%bb%b6%e5%a4%a7%e4%ba%8e4g" v-on:click="closeDrawer" id="支持单个文件大于4g-nav">
+										 支持单个文件大于4G
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#3%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f" v-on:click="closeDrawer" id="3文件系统-nav">
+										 3.文件系统
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4">
+                        安全运维
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+                        无线安全
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#1%e8%ae%be%e6%9d%83%e9%99%90%e7%9a%84%e6%84%8f%e4%b9%89" v-on:click="closeDrawer" id="1设权限的意义-nav">
+										 1.设权限的意义
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#2ntfs%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f%e7%89%b9%e7%82%b9" v-on:click="closeDrawer" id="2ntfs文件系统特点-nav">
+										 2.NTFS文件系统特点
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%af%e5%8a%a0%e5%af%86" v-on:click="closeDrawer" id="可加密-nav">
+										 可加密
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%ae%bf%e9%97%ae%e6%8e%a7%e5%88%b6%e5%88%97%e8%a1%a8%e8%ae%be%e7%bd%ae%e6%9d%83%e9%99%90" v-on:click="closeDrawer" id="访问控制列表设置权限-nav">
+										 访问控制列表（设置权限）
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%9d%83%e9%99%90%e5%88%97%e8%a1%a8" v-on:click="closeDrawer" id="权限列表-nav">
+										 权限列表
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%96%e6%b6%88%e7%bb%a7%e6%89%bf" v-on:click="closeDrawer" id="取消继承-nav">
+										 取消继承
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%9d%83%e9%99%90%e7%b4%af%e5%8a%a0" v-on:click="closeDrawer" id="权限累加-nav">
+										 权限累加
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%ba%e5%88%b6%e7%bb%a7%e6%89%bf" v-on:click="closeDrawer" id="强制继承-nav">
+										 强制继承
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%a3%81%e7%9b%98%e5%88%a9%e7%94%a8%e7%8e%87" v-on:click="closeDrawer" id="磁盘利用率-nav">
+										 磁盘利用率
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%94%af%e6%8c%81%e5%8d%95%e4%b8%aa%e6%96%87%e4%bb%b6%e5%a4%a7%e4%ba%8e4g" v-on:click="closeDrawer" id="支持单个文件大于4g-nav">
+										 支持单个文件大于4G
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#3%e6%96%87%e4%bb%b6%e7%b3%bb%e7%bb%9f" v-on:click="closeDrawer" id="3文件系统-nav">
+										 3.文件系统
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="http://example.org/">
+            nowhere
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://example.org/">
+        <div class="single-column-header-title">nowhere</div>
+        
+        <div class="single-column-header-subtitle">a blog in the air.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('/imageOfPaperHead/NTFS%e6%9d%83%e9%99%90.jpg')">
+                <div class="post-title">
+                    NTFS权限管理
+                    <div class="post-meta">
+                        <time itemprop="datePublished">
+                            2020-02-25 12:45
+                        </time>
+
+                        
+
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h1 id="1设权限的意义">1.设权限的意义</h1>
+<ul>
+<li>
+<p>使不同用户对文件/文件夹有不同的访问权限，防止资源被篡改、删除。</p>
+</li>
+<li>
+<p>例如IT部和人力资源部有各自的文件夹，相互之间的访问有限制。</p>
+</li>
+</ul>
+<h1 id="2ntfs文件系统特点">2.NTFS文件系统特点</h1>
+<h2 id="可加密">可加密</h2>
+<p>保护物理安全，防止被偷窃的计算机泄密。</p>
+<h2 id="访问控制列表设置权限">访问控制列表（设置权限）</h2>
+<p>属性中可以用&quot;安全&quot;选项卡设置各用户权限。</p>
+<h3 id="权限列表">权限列表</h3>
+<p><img src="/media/media2/e65d8309516ccd1c50bc91f00be1133ceb0fae9a.png" alt=""></p>
+<p><img src="/media/media2/d6826f31393f4e79252150ae1d6d79086b99f113.png" alt=""></p>
+<h3 id="取消继承">取消继承</h3>
+<p>A用户创建的文件/文件夹的ACL表，如果想删除表中从父目录继承得到的组/用户，必须先取消父继承，然后就可以删除管理员等。</p>
+<p><img src="/media/media2/f53ff1d24f98b727f887ce3c9d806f3f972b4e10.png" alt=""></p>
+<p>但是，管理员有特权可以修改文件/文件夹的所有者，它可以修改所有者为管理员自己，进而修改A用户文件夹的ACL。</p>
+<h3 id="权限累加">权限累加</h3>
+<p>如果B用户在C组，而B和C都在ACL中，那么最终B用户拥有的权限是B的权限+C组拥有的权限。</p>
+<p>如果不希望B拥有C组在该文件夹的权限，但又不方便从C组删除用户B（用户B可能还需要在C组的某些其他权限），可以在该文件夹的ACL中单独设置B用户的拒绝权限。</p>
+<h3 id="强制继承">强制继承</h3>
+<p>父目录强制子目录继承其ACL：</p>
+<p><img src="/media/media2/362fe3c026b1f35429f8616af58711f35ee37af7.png" alt=""></p>
+<h2 id="磁盘利用率">磁盘利用率</h2>
+<ul>
+<li>
+<p>可压缩</p>
+</li>
+<li>
+<p>可磁盘配额</p>
+</li>
+</ul>
+<h2 id="支持单个文件大于4g">支持单个文件大于4G</h2>
+<hr>
+<h1 id="3文件系统">3.文件系统</h1>
+<p>存储文件的方式叫文件系统。它是外部存储设备组织文件的方式。</p>
+<p>格式化就是在重做文件系统。</p>
+<p><img src="/media/media2/e35a76515302886f1fa6402fe435cb701e1d9831.png" alt=""></p>
+
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-02-25</p>
+                </div>
+                
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://example.org/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/">
+                    Previous<br>服务器远程管理
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+                <p style="opacity: 0.6" align="center">
+                    <small>Comments Disabled.</small>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+&copy;
+	
+	2020 ownhp. All rights reserved.
+	</div>
+    	</div>
+    <script src="http://example.org//js/journal.js"></script>
+    </body>
+</html>

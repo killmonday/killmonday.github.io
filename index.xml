@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nowhere</title>
+    <link>http://example.org/</link>
+    <description>Recent content on nowhere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>2020 ownhp. All rights reserved.</copyright>
+    <lastBuildDate>Tue, 25 Feb 2020 12:45:06 +0800</lastBuildDate>
+    
+	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>NTFS权限管理</title>
+      <link>http://example.org/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/</link>
+      <pubDate>Tue, 25 Feb 2020 12:45:06 +0800</pubDate>
+      
+      <guid>http://example.org/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/ntfs%E6%9D%83%E9%99%90/</guid>
+      <description>1.设权限的意义   使不同用户对文件/文件夹有不同的访问权限，防止资源被篡改、删除。
+  例如IT部和人力资源部有各自的文件夹，相互之间的访问有限制。
+  2.NTFS文件系统特点 可加密 保护物理安全，防止被偷窃的计算机泄密。
+访问控制列表（设置权限） 属性中可以用&amp;quot;安全&amp;quot;选项卡设置各用户权限。
+权限列表 取消继承 A用户创建的文件/文件夹的ACL表，如果想删除表中从父目录继承得到的组/用户，必须先取消父继承，然后就可以删除管理员等。
+但是，管理员有特权可以修改文件/文件夹的所有者，它可以修改所有者为管理员自己，进而修改A用户文件夹的ACL。
+权限累加 如果B用户在C组，而B和C都在ACL中，那么最终B用户拥有的权限是B的权限+C组拥有的权限。
+如果不希望B拥有C组在该文件夹的权限，但又不方便从C组删除用户B（用户B可能还需要在C组的某些其他权限），可以在该文件夹的ACL中单独设置B用户的拒绝权限。
+强制继承 父目录强制子目录继承其ACL：
+磁盘利用率   可压缩
+  可磁盘配额
+  支持单个文件大于4G  3.文件系统 存储文件的方式叫文件系统。它是外部存储设备组织文件的方式。
+格式化就是在重做文件系统。</description>
+    </item>
+    
+    <item>
+      <title>服务器远程管理</title>
+      <link>http://example.org/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 25 Feb 2020 12:45:06 +0810</pubDate>
+      
+      <guid>http://example.org/posts/1.%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4/1.%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/</guid>
+      <description>远程管理方式 1.命令管理-telnet 端口默认23。
+开启telnet服务   打开服务win+R services.msc；
+  找到服务Task Scheduler和Telnet，分别设为自动启动。
+  添加用户到TelnetClients组   我的电脑右键，管理，本地用户和组，组，TelnetClients。
+  或命令添加：略。
+  telnet登录 telnet &amp;lt;目标IP地址&amp;gt; 2.图形化管理-mstsc 端口默认3389。
+开启远程桌面   XP：我的电脑右键，属性，远程，勾选启用。
+  WIN10：我的电脑右键，属性，远程设置、
+  添加用户到远程桌面组 （管理员不用添加，它所有权限都有）
+  我的电脑右键，管理，本地用户和组，组，Remote Desktop Users。
+  或命令添加：
+  net localgroup &amp;quot;Remote Desktop Users&amp;quot; &amp;lt;用户名&amp;gt; /add</description>
+    </item>
+    
+  </channel>
+</rss>
