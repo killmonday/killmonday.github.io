@@ -519,9 +519,9 @@
 <p>安装后，dnsmasq的默认配置文件路径是/etc/dnsmasq.conf。
 编辑dnsmasq.conf</p>
 <pre><code>vi /etc/dnsmasq.conf
-</code></pre><p>//找到行“#dhcp-range=……”，去掉“#”号，并整行修改为“dhcp-range=172.5.5.100,172.5.5.250,12h”
-//找到行“#interface=……”，去掉“#”号，并整行修改为“interface=&lt;无线网卡设备名&gt;”，例如“interface=wlan0”。
-//找到行“#addn-hosts=……”，删除“#”并修改为“addn-hosts=/etc/dnsmasq/dns.conf”，表示读取额外hosts路径，而dns.conf文件中则以“IP_addr  domain_name”的形式存放dns解析记录</p>
+</code></pre><p>//找到行“#dhcp-range=……”，去掉“#”号，并整行修改为“dhcp-range=172.5.5.100,172.5.5.250,12h”</p>
+<p>//找到行“#interface=……”，去掉“#”号，并整行修改为“interface=&lt;无线网卡设备名&gt;”，例如“interface=wlan0”。</p>
+<p>//找到行“#addn-hosts=……”，删除“#”并修改为“addn-hosts=/etc/dnsmasq/dns.conf”，表示读取额外hosts路径，而dns.conf文件中则以“IP_addr  domain_name”的形式存放dns解析记录</p>
 <p>新建文件夹/etc/dnsmasq：</p>
 <pre><code>mkdir /etc/dnsmasq
 </code></pre><p>创建dns.conf文件：</p>
