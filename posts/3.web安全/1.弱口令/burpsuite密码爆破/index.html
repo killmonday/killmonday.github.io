@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html><head>
+<title>burpsuite爆破HTTP基本认证口令</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="https://killmonday.github.io/scss/journal.min.75e350a979186b10ecf739a405199a5eaf37fd6bd3463a78ae5c70c634963fde.css" integrity="sha256-deNQqXkYaxDs9zmkBRmaXq83/WvTRjp4rlxwxjSWP94=" media="screen">
+
+<script src="https://killmonday.github.io/js/loadCSS.js"></script>
+<script src="https://killmonday.github.io/js/table.js"></script>
+
+
+<script src="https://killmonday.github.io/js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://killmonday.github.io">
+    
+        <div class="nav-title">
+            nowhere
+        </div>
+        
+        <div class="nav-subtitle">
+            a blog in the air.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4">
+                    安全运维
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+                    无线安全
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/%E5%90%8E%E9%97%A8">
+                    后门
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/web%E5%AE%89%E5%85%A8">
+                    Web安全
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+&copy;
+	
+	2020 ownhp. All rights reserved.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#1burpsuite%e7%9b%b4%e6%8e%a5%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="1burpsuite直接爆破-nav">
+										 1.burpsuite直接爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%81%ab%e7%8b%90%e6%89%93%e5%bc%80%e4%bb%a3%e7%90%86%e6%8c%87%e5%90%91burpsuite" v-on:click="closeDrawer" id="火狐打开代理指向burpsuite-nav">
+										 火狐打开代理，指向burpsuite
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#burpsuite%e5%bc%80%e5%90%af%e4%bb%a3%e7%90%86%e6%9c%8d%e5%8a%a1" v-on:click="closeDrawer" id="burpsuite开启代理服务-nav">
+										 burpsuite开启代理服务
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%ae%bf%e9%97%aehttp%e5%9f%ba%e6%9c%ac%e8%ae%a4%e8%af%81%e7%9a%84%e9%a1%b5%e9%9d%a2" v-on:click="closeDrawer" id="访问http基本认证的页面-nav">
+										 访问HTTP基本认证的页面
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%ae%be%e7%bd%aeintruder%e6%a8%a1%e5%9d%97%e5%8f%8a%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="设置intruder模块及爆破-nav">
+										 设置Intruder模块及爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%8e%b7%e5%8f%96%e7%88%86%e7%a0%b4%e7%bb%93%e6%9e%9c" v-on:click="closeDrawer" id="获取爆破结果-nav">
+										 获取爆破结果
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#2pythonburpsuite%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="2pythonburpsuite爆破-nav">
+										 2.Python&#43;burpsuite爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#python%e4%bb%a3%e7%a0%81" v-on:click="closeDrawer" id="python代码-nav">
+										 python代码
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%94%9f%e6%88%90%e7%94%a8%e6%88%b7%e5%90%8d%e5%8f%8a%e5%8f%a3%e4%bb%a4%e7%9a%84base64%e7%bc%96%e7%a0%81" v-on:click="closeDrawer" id="生成用户名及口令的base64编码-nav">
+										 生成用户名及口令的base64编码
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%af%bc%e5%85%a5burpsuite%e5%bc%80%e5%a7%8b%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="导入burpsuite开始爆破-nav">
+										 导入burpsuite开始爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4">
+                        安全运维
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8">
+                        无线安全
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/%E5%90%8E%E9%97%A8">
+                        后门
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/web%E5%AE%89%E5%85%A8">
+                        Web安全
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#1burpsuite%e7%9b%b4%e6%8e%a5%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="1burpsuite直接爆破-nav">
+										 1.burpsuite直接爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%81%ab%e7%8b%90%e6%89%93%e5%bc%80%e4%bb%a3%e7%90%86%e6%8c%87%e5%90%91burpsuite" v-on:click="closeDrawer" id="火狐打开代理指向burpsuite-nav">
+										 火狐打开代理，指向burpsuite
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#burpsuite%e5%bc%80%e5%90%af%e4%bb%a3%e7%90%86%e6%9c%8d%e5%8a%a1" v-on:click="closeDrawer" id="burpsuite开启代理服务-nav">
+										 burpsuite开启代理服务
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%ae%bf%e9%97%aehttp%e5%9f%ba%e6%9c%ac%e8%ae%a4%e8%af%81%e7%9a%84%e9%a1%b5%e9%9d%a2" v-on:click="closeDrawer" id="访问http基本认证的页面-nav">
+										 访问HTTP基本认证的页面
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%ae%be%e7%bd%aeintruder%e6%a8%a1%e5%9d%97%e5%8f%8a%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="设置intruder模块及爆破-nav">
+										 设置Intruder模块及爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%8e%b7%e5%8f%96%e7%88%86%e7%a0%b4%e7%bb%93%e6%9e%9c" v-on:click="closeDrawer" id="获取爆破结果-nav">
+										 获取爆破结果
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#2pythonburpsuite%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="2pythonburpsuite爆破-nav">
+										 2.Python&#43;burpsuite爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#python%e4%bb%a3%e7%a0%81" v-on:click="closeDrawer" id="python代码-nav">
+										 python代码
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%94%9f%e6%88%90%e7%94%a8%e6%88%b7%e5%90%8d%e5%8f%8a%e5%8f%a3%e4%bb%a4%e7%9a%84base64%e7%bc%96%e7%a0%81" v-on:click="closeDrawer" id="生成用户名及口令的base64编码-nav">
+										 生成用户名及口令的base64编码
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%af%bc%e5%85%a5burpsuite%e5%bc%80%e5%a7%8b%e7%88%86%e7%a0%b4" v-on:click="closeDrawer" id="导入burpsuite开始爆破-nav">
+										 导入burpsuite开始爆破
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://killmonday.github.io">
+            nowhere
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://killmonday.github.io">
+        <div class="single-column-header-title">nowhere</div>
+        
+        <div class="single-column-header-subtitle">a blog in the air.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('/imageOfPaperHead/burpsuite%e7%88%86%e7%a0%b4HTTP%e5%9f%ba%e6%9c%ac%e8%ae%a4%e8%af%81.jpg')">
+                <div class="post-title">
+                    burpsuite爆破HTTP基本认证口令
+                    <div class="post-meta">
+                        <time itemprop="datePublished">
+                            2020-03-02 13:00
+                        </time>
+
+                        
+
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <p>本文在虚拟环境下使用两种方式爆破HTTP基本认证的口令：</p>
+<p>1.burpsuite直接爆破；</p>
+<p>2.Python生成（用户名:口令）的base64编码，导入burpsuite爆破。</p>
+<p><a href="%5Bhttps://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81%5D(https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81)">HTTP基本认证的知识</a></p>
+<h1 id="1burpsuite直接爆破">1.burpsuite直接爆破</h1>
+<h2 id="火狐打开代理指向burpsuite">火狐打开代理，指向burpsuite</h2>
+<p>使用火狐插件“FoxyProxy”设置代理为“127.0.0.1:8080”——burpsuite默认的代理服务地址。</p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302214128865.png" alt="image-20200302214128865"></p>
+<h2 id="burpsuite开启代理服务">burpsuite开启代理服务</h2>
+<ul>
+<li>在“Proxy”选项卡的”Options”选项页可以设置代理服务地址</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302214541834.png" alt="image-20200302214541834"></p>
+<ul>
+<li>开启代理服务</li>
+</ul>
+<p>在“Proxy”选项卡的“Intercept”选项页点击“Intercept is off”，点击后变为“Intercept is on”</p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302214713532.png" alt="image-20200302214713532"></p>
+<h2 id="访问http基本认证的页面">访问HTTP基本认证的页面</h2>
+<ul>
+<li>随便输入用户名及口令，点击“确定”</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302214928712.png" alt="image-20200302214928712"></p>
+<h2 id="设置intruder模块及爆破">设置Intruder模块及爆破</h2>
+<p>回到burpsuite窗口。</p>
+<ul>
+<li>右键，点击 “Sent to  Intruder”</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302215114536.png" alt="image-20200302215114536"></p>
+<ul>
+<li>点击“Intruder”选项卡-&gt;“Positions”选项页，选中用户名及口令的base64编码部分，然后点击“Add ξ”，这表示该部分在爆破时会自动被payload替换</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302222203113.png" alt="image-20200302222203113"></p>
+<ul>
+<li>点击到“Payload”选项页，点击“Load”以添加payload文件（本实验中，payload文件代表口令字典，保存着多个常用口令）</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302222633230.png" alt="image-20200302222633230"></p>
+<ul>
+<li>
+<p>给payload添加前缀（用户名及分隔符“:”），并给整个payload（用户名:口令）添加一个编码类型</p>
+<p>在下方的“Payload Processing”中点击“add”，先给payload添加一个前缀：</p>
+</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302223121043.png" alt="image-20200302223121043"></p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302223318751.png" alt="image-20200302223318751"></p>
+<p>再添加编码“Encode”，并设置编码类型为“Base64-encode”：</p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302223410761.png" alt="image-20200302223410761"></p>
+<ul>
+<li>取消勾选下方的payload再编码</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302223556480.png" alt="image-20200302223556480"></p>
+<ul>
+<li>设置线程数等，然后点击“Start attack”</li>
+</ul>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302223825783.png" alt="image-20200302223825783"></p>
+<h2 id="获取爆破结果">获取爆破结果</h2>
+<p>在众多请求结果中，看到了一个HTTP返回值为200、页面长度也不同于别的请求的返回结果，它就是成功获得HTTP基本认证的那个请求。查看这个请求，复制出请求中的基本认证字段，用base64解码即可得到用户名和口令。</p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302224206683.png" alt="image-20200302224206683"></p>
+<h1 id="2pythonburpsuite爆破">2.Python+burpsuite爆破</h1>
+<p>先用Python计算出HTTP基本认证的”用户名:口令“的base64编码，保存为文件，再用burpsuite导入该文件作为payload。</p>
+<h2 id="python代码">python代码</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#coding:utf-8</span>
+<span style="color:#75715e">#INPUT1 : user names list file </span>
+<span style="color:#75715e">#INPUT2: password list file</span>
+<span style="color:#75715e">#OUTPUT:  &#34;username:password&#34; list encoded by base64</span>
+
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> base64
+  
+<span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv)<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>:
+    <span style="color:#66d9ef">print</span> <span style="color:#e6db74">&#34;Usage:&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34; httpCertCrack.py &#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;userListFile &#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34;passListFile&#34;</span><span style="color:#f92672">+</span><span style="color:#e6db74">&#34; &gt; pwBase64.txt&#34;</span>
+    sys<span style="color:#f92672">.</span>exit()
+  
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">httpCertUserPassToBase64</span>(userfile,passfile):
+  
+    uf<span style="color:#f92672">=</span>open(userfile,<span style="color:#e6db74">&#39;r&#39;</span>)
+    pf<span style="color:#f92672">=</span>open(passfile,<span style="color:#e6db74">&#39;r&#39;</span>)
+    <span style="color:#66d9ef">for</span> user <span style="color:#f92672">in</span> uf<span style="color:#f92672">.</span>readlines():
+        <span style="color:#75715e">#移动passwd文件的指针到文件头，使得passwd文件可以重复遍历。第一个参数0表示偏移量为0，第二个参数0表示从文件头开始偏移。</span>
+        pf<span style="color:#f92672">.</span>seek(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+        <span style="color:#66d9ef">for</span> passwd <span style="color:#f92672">in</span> pf<span style="color:#f92672">.</span>readlines():
+            user<span style="color:#f92672">=</span>user<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+            passwd<span style="color:#f92672">=</span>passwd<span style="color:#f92672">.</span>strip(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>)
+            hashvul<span style="color:#f92672">=</span>user<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;:&#39;</span><span style="color:#f92672">+</span>passwd
+            base64hash<span style="color:#f92672">=</span>base64<span style="color:#f92672">.</span>b64encode(hashvul)
+            <span style="color:#75715e">#print user,passwd,base64hash</span>
+            <span style="color:#66d9ef">print</span> base64hash
+<span style="color:#66d9ef">if</span> __name__<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;__main__&#34;</span>:
+    httpCertUserPassToBase64(sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>],sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">2</span>])
+</code></pre></div><h2 id="生成用户名及口令的base64编码">生成用户名及口令的base64编码</h2>
+<p>使用Python2运行：</p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302225726799.png" alt="image-20200302225726799"></p>
+<p>用notepad++打开，设置编码为utf8 无BOM，然后保存，否则burpsuite不能有效读取该文件：</p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302230023329.png" alt="image-20200302230023329"></p>
+<h2 id="导入burpsuite开始爆破">导入burpsuite开始爆破</h2>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302230138879.png" alt="image-20200302230138879"></p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302230237292.png" alt="image-20200302230237292"></p>
+<p><img src="/media/burpsuite%E7%88%86%E7%A0%B4HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81/image-20200302230358376.png" alt="image-20200302230358376"></p>
+
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-03-02</p>
+                </div>
+                
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://killmonday.github.io/posts/3.%E5%90%8E%E9%97%A8/ffmpeg%E5%90%8E%E9%97%A8/">
+                    Previous<br>2020免杀，ffmpeg实时监听桌面和麦克风
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+                <p style="opacity: 0.6" align="center">
+                    <small>Comments Disabled.</small>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+&copy;
+	
+	2020 ownhp. All rights reserved.
+	</div>
+    	</div>
+    <script src="https://killmonday.github.io/js/journal.js"></script>
+    </body>
+</html>

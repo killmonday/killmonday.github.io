@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>弱口令 on nowhere</title>
+    <link>https://killmonday.github.io/web%E5%AE%89%E5%85%A8/%E5%BC%B1%E5%8F%A3%E4%BB%A4/</link>
+    <description>Recent content in 弱口令 on nowhere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>2020 ownhp. All rights reserved.</copyright>
+    <lastBuildDate>Mon, 02 Mar 2020 13:00:06 +0810</lastBuildDate>
+    
+	<atom:link href="https://killmonday.github.io/web%E5%AE%89%E5%85%A8/%E5%BC%B1%E5%8F%A3%E4%BB%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>burpsuite爆破HTTP基本认证口令</title>
+      <link>https://killmonday.github.io/posts/3.web%E5%AE%89%E5%85%A8/1.%E5%BC%B1%E5%8F%A3%E4%BB%A4/burpsuite%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4/</link>
+      <pubDate>Mon, 02 Mar 2020 13:00:06 +0810</pubDate>
+      
+      <guid>https://killmonday.github.io/posts/3.web%E5%AE%89%E5%85%A8/1.%E5%BC%B1%E5%8F%A3%E4%BB%A4/burpsuite%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4/</guid>
+      <description>本文在虚拟环境下使用两种方式爆破HTTP基本认证的口令：
+1.burpsuite直接爆破；
+2.Python生成（用户名:口令）的base64编码，导入burpsuite爆破。
+HTTP基本认证的知识
+1.burpsuite直接爆破 火狐打开代理，指向burpsuite 使用火狐插件“FoxyProxy”设置代理为“127.0.0.1:8080”——burpsuite默认的代理服务地址。
+burpsuite开启代理服务  在“Proxy”选项卡的”Options”选项页可以设置代理服务地址   开启代理服务  在“Proxy”选项卡的“Intercept”选项页点击“Intercept is off”，点击后变为“Intercept is on”
+访问HTTP基本认证的页面  随便输入用户名及口令，点击“确定”  设置Intruder模块及爆破 回到burpsuite窗口。
+ 右键，点击 “Sent to Intruder”   点击“Intruder”选项卡-&amp;gt;“Positions”选项页，选中用户名及口令的base64编码部分，然后点击“Add ξ”，这表示该部分在爆破时会自动被payload替换   点击到“Payload”选项页，点击“Load”以添加payload文件（本实验中，payload文件代表口令字典，保存着多个常用口令）    给payload添加前缀（用户名及分隔符“:”），并给整个payload（用户名:口令）添加一个编码类型
+在下方的“Payload Processing”中点击“add”，先给payload添加一个前缀：
+  再添加编码“Encode”，并设置编码类型为“Base64-encode”：
+ 取消勾选下方的payload再编码   设置线程数等，然后点击“Start attack”  获取爆破结果 在众多请求结果中，看到了一个HTTP返回值为200、页面长度也不同于别的请求的返回结果，它就是成功获得HTTP基本认证的那个请求。查看这个请求，复制出请求中的基本认证字段，用base64解码即可得到用户名和口令。
+2.Python+burpsuite爆破 先用Python计算出HTTP基本认证的”用户名:口令“的base64编码，保存为文件，再用burpsuite导入该文件作为payload。
+python代码 #coding:utf-8 #INPUT1 : user names list file  #INPUT2: password list file #OUTPUT: &amp;#34;username:password&amp;#34; list encoded by base64 import sysimport base64if len(sys.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Web安全 on nowhere</title>
+    <link>https://killmonday.github.io/web%E5%AE%89%E5%85%A8/</link>
+    <description>Recent content in Web安全 on nowhere</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>2020 ownhp. All rights reserved.</copyright>
+    <lastBuildDate>Mon, 02 Mar 2020 13:00:06 +0810</lastBuildDate>
+    
+	<atom:link href="https://killmonday.github.io/web%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>弱口令</title>
+      <link>https://killmonday.github.io/web%E5%AE%89%E5%85%A8/%E5%BC%B1%E5%8F%A3%E4%BB%A4/</link>
+      <pubDate>Mon, 02 Mar 2020 13:00:06 +0810</pubDate>
+      
+      <guid>https://killmonday.github.io/web%E5%AE%89%E5%85%A8/%E5%BC%B1%E5%8F%A3%E4%BB%A4/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
